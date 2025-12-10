@@ -3,8 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config'; 
 import { TypeOrmModule } from '@nestjs/typeorm'; 
-import configuration from './config/configuration';
-import validationSchema from './config/validation'; 
+import configuration from './core/config/configuration';
+import validationSchema from './core/config/validation'; 
+import { TestModule } from './modules/test/test.module';
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import validationSchema from './config/validation';
       envFilePath: `.env.${process.env.NODE_ENV || 'development'}`,
       validationSchema,
     }),
-    
+
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -35,6 +36,8 @@ import validationSchema from './config/validation';
         synchronize: false, // Database First ต้องปิดตัวนี้เสมอ (ห้ามเป็น true)
       }),
     }),
+    
+    TestModule,
   ],
   controllers: [AppController],
   providers: [AppService],
