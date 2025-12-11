@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import configuration from './core/config/configuration';
 import validationSchema from './core/config/validation'; 
 import { TestModule } from './modules/test/test.module';
+import { Test2Module } from './modules/test2/test2.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { TestModule } from './modules/test/test.module';
     }),
     
     TestModule,
+    Test2Module,
   ],
   controllers: [AppController],
   providers: [AppService],

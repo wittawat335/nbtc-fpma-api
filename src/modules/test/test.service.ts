@@ -14,7 +14,6 @@ export class TestService {
   ) {}
   async create(createTestDto: CreateFpmaMasterDistrictDto) : Promise<FpmaMasterDistrict> {
     const mapper = plainToInstance(FpmaMasterDistrict, createTestDto);
-
     const data = this.repository.create(mapper);
 
     return await this.repository.save(data)
@@ -26,7 +25,6 @@ export class TestService {
 
   async findOne(id: number): Promise<FpmaMasterDistrict> {
     const data = await this.repository.findOneBy({ itemId: id });
-
     if (!data) {
       throw new NotFoundException(`ID ${id} not found`);
     }
