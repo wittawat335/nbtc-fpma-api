@@ -17,7 +17,7 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
 
       entities: [
         __dirname + '/modules/**/*.entity{.ts,.js}',
-        __dirname + '/entities/*.ts',
+        __dirname + '/../../entities/*.ts',
       ], // ชี้ไปหา Entity ใน modules
 
       options: {
