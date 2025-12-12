@@ -4,10 +4,23 @@ import { MasterDataController } from './master-data.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { FpmaMasterDistrict } from 'src/entities/FpmaMasterDistrict';
 import { FpmaMasterDepartment } from 'src/entities/FpmaMasterDepartment';
+import { FpmaMasterDivision } from 'src/entities/FpmaMasterDivision';
+import { FpmaMasterEducationalQualification } from 'src/entities/FpmaMasterEducationalQualification';
+import { FpmaMasterForm } from 'src/entities/FpmaMasterForm';
+import { FpmaMasterGovermentPolicy } from 'src/entities/FpmaMasterGovermentPolicy';
+import { FpmaMasterLicense } from 'src/entities/FpmaMasterLicense';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([FpmaMasterDistrict, FpmaMasterDepartment]),
+    TypeOrmModule.forFeature([
+      FpmaMasterDistrict,
+      FpmaMasterDepartment,
+      FpmaMasterDivision,
+      FpmaMasterEducationalQualification,
+      FpmaMasterForm,
+      FpmaMasterGovermentPolicy,
+      FpmaMasterLicense,
+    ]),
   ],
   controllers: [MasterDataController],
   providers: [MasterDataService],
