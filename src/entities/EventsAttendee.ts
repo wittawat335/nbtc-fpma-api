@@ -6,49 +6,28 @@ export class EventsAttendee {
   @PrimaryGeneratedColumn({ type: "int", name: "AttendeeID" })
   attendeeId: number;
 
-  @Column("nvarchar", {
-    name: "AttendeeEmail",
-    length: 254,
-    default: () => "N''",
-  })
+  @Column("nvarchar", { name: "AttendeeEmail", length: 254 })
   attendeeEmail: string;
 
   @Column("nvarchar", {
     name: "AttendeeFirstName",
     nullable: true,
     length: 100,
-    default: () => "N''",
   })
   attendeeFirstName: string | null;
 
-  @Column("nvarchar", {
-    name: "AttendeeLastName",
-    nullable: true,
-    length: 100,
-    default: () => "N''",
-  })
+  @Column("nvarchar", { name: "AttendeeLastName", nullable: true, length: 100 })
   attendeeLastName: string | null;
 
-  @Column("nvarchar", {
-    name: "AttendeePhone",
-    nullable: true,
-    length: 50,
-    default: () => "N''",
-  })
+  @Column("nvarchar", { name: "AttendeePhone", nullable: true, length: 50 })
   attendeePhone: string | null;
 
   @Column("int", { name: "AttendeeEventNodeID" })
   attendeeEventNodeId: number;
 
-  @Column("uniqueidentifier", {
-    name: "AttendeeGUID",
-    default: () => "'00000000-0000-0000-0000-000000000000'",
-  })
+  @Column("uniqueidentifier", { name: "AttendeeGUID" })
   attendeeGuid: string;
 
-  @Column("datetime2", {
-    name: "AttendeeLastModified",
-    default: () => "'1/20/2015 8:52:25 AM'",
-  })
+  @Column("datetime2", { name: "AttendeeLastModified" })
   attendeeLastModified: Date;
 }

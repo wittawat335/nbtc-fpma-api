@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
 import { configModuleOptions } from './config/configuration.options';
 
-@Global() // 
+@Global() 
 @Module({
   imports: [
     ConfigModule.forRoot(configModuleOptions),

@@ -6,15 +6,12 @@ export class CustomAnnouncePopup {
   @PrimaryGeneratedColumn({ type: "int", name: "AnnouncePopupID" })
   announcePopupId: number;
 
-  @Column("nvarchar", { name: "name", length: 200, default: () => "N''" })
+  @Column("nvarchar", { name: "name", length: 200 })
   name: string;
 
-  @Column("nvarchar", { name: "desc", default: () => "N''" })
+  @Column("nvarchar", { name: "desc" })
   desc: string;
 
-  @Column("uniqueidentifier", {
-    name: "img",
-    default: () => "'00000000-0000-0000-0000-000000000000'",
-  })
+  @Column("uniqueidentifier", { name: "img" })
   img: string;
 }

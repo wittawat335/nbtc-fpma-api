@@ -6,12 +6,9 @@ export class CustomManual {
   @PrimaryGeneratedColumn({ type: "int", name: "ManualID" })
   manualId: number;
 
-  @Column("nvarchar", { name: "name", length: 200, default: () => "N''" })
+  @Column("nvarchar", { name: "name", length: 200 })
   name: string;
 
-  @Column("uniqueidentifier", {
-    name: "file",
-    default: () => "'00000000-0000-0000-0000-000000000000'",
-  })
+  @Column("uniqueidentifier", { name: "file" })
   file: string;
 }

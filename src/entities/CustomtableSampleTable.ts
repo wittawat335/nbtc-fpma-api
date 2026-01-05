@@ -21,12 +21,9 @@ export class CustomtableSampleTable {
   @Column("int", { name: "ItemOrder", nullable: true })
   itemOrder: number | null;
 
-  @Column("nvarchar", { name: "ItemText", length: 400, default: () => "N''" })
+  @Column("nvarchar", { name: "ItemText", length: 400 })
   itemText: string;
 
-  @Column("uniqueidentifier", {
-    name: "ItemGUID",
-    default: () => "'00000000-0000-0000-0000-000000000000'",
-  })
+  @Column("uniqueidentifier", { name: "ItemGUID" })
   itemGuid: string;
 }

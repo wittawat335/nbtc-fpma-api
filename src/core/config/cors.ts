@@ -5,7 +5,7 @@ export function getCorsOptions(): CorsOptions {
 
   if (isProduction) {
     return {
-      origin: ['https://your-production-domain.com'], // ใส่ Domain จริงที่นี่
+      origin: ['https://your-production-domain.com'], // ใส่ Domain
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
       allowedHeaders: 'Content-Type, Accept, Authorization',
       credentials: true,

@@ -10,11 +10,9 @@ import { MASTER_CONFIG } from './master-data.config';
 export class MasterDataService {
   constructor(private dataSource: DataSource) {}
 
-  async getOptions(type: string) {
-    // ดึง Config ตาม type ที่ส่งมา
+  async getOptions(type: string, parentId?: string | number) {
     const config = MASTER_CONFIG[type];
 
-    // ถ้าไม่เจอ Config (แสดงว่า Frontend ส่ง key ผิด)
     if (!config) {
       throw new BadRequestException(
         `Master data type '${type}' is not configured.`,
@@ -22,25 +20,79 @@ export class MasterDataService {
     }
 
     try {
-      // ขอ Repository จาก Entity ที่กำหนดไว้
       const repository = this.dataSource.getRepository(config.entity);
 
-      const data = await repository.find({
-        select: [config.value, config.label],
-        order: {
-          [config.orderBy]: 'ASC',
-        },
-      });
+      const selectColumns = [config.value, config.label];
+      if (config.extraSelect) {
+        selectColumns.push(...config.extraSelect);
+      }
 
-      // แปลงข้อมูลให้อยู่ในรูปแบบ { value, label } ที่ Dropdown ทั่วไปต้องการ
-      return data.map((item) => ({
-        value: item[config.value], // เช่น ItemID (1, 2, 3...)
-        label: item[config.label], // เช่น 'อำเภอเมือง', 'ฝ่ายไอที'
-      }));
+      const queryBuilder = repository
+        .createQueryBuilder('m')
+        .select(selectColumns.map((col) => `m.${col}`))
+        .orderBy(`m.${config.orderBy}`, 'ASC');
+
+      if (parentId && config.parentField) {
+        queryBuilder.where(`m.${config.parentField} = :parentId`, { parentId });
+      }
+
+      const data = await queryBuilder.getMany();
+
+      return data.map((item) => {
+        const result: any = {
+          value: item[config.value],
+          label: item[config.label],
+        };
+        if (config.extraSelect) {
+          config.extraSelect.forEach((field) => {
+            result[field] = item[field];
+          });
+        }
+        return result;
+      });
     } catch (error) {
       console.error(error);
       throw new BadRequestException(
         'Database error: Check column names in config.',
+      );
+    }
+  }
+  async getById(type: string, id: string | number) {
+    const config = MASTER_CONFIG[type];
+
+    if (!config) {
+      throw new BadRequestException(
+        `Master data type '${type}' is not configured.`,
+      );
+    }
+
+    try {
+      const repository = this.dataSource.getRepository(config.entity);
+
+      const whereCondition = {};
+      whereCondition[config.value] = id;
+
+      const data = await repository.findOne({
+        where: whereCondition,
+        select: [config.value, config.label],
+      });
+
+      if (!data) {
+        throw new NotFoundException(
+          `Data not found for type ${type} with id ${id}`,
+        );
+      }
+
+      return {
+        value: data[config.value],
+        label: data[config.label],
+      };
+    } catch (error) {
+      console.error(error);
+      if (error instanceof NotFoundException) throw error;
+
+      throw new BadRequestException(
+        'Database error: Check column names in config or invalid ID.',
       );
     }
   }

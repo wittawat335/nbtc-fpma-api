@@ -9,6 +9,9 @@ import { FpmaMasterEducationalQualification } from 'src/entities/FpmaMasterEduca
 import { FpmaMasterForm } from 'src/entities/FpmaMasterForm';
 import { FpmaMasterGovermentPolicy } from 'src/entities/FpmaMasterGovermentPolicy';
 import { FpmaMasterLicense } from 'src/entities/FpmaMasterLicense';
+import { FpmaMasterSubDistrict } from 'src/entities/FpmaMasterSubDistrict';
+import { FpmaMasterProvinces } from 'src/entities/FpmaMasterProvinces';
+import { FpmaMasterTitle } from 'src/entities/FpmaMasterTitle';
 
 @Module({
   imports: [
@@ -20,6 +23,9 @@ import { FpmaMasterLicense } from 'src/entities/FpmaMasterLicense';
       FpmaMasterForm,
       FpmaMasterGovermentPolicy,
       FpmaMasterLicense,
+      FpmaMasterSubDistrict,
+      FpmaMasterProvinces,
+      FpmaMasterTitle,
     ]),
   ],
   controllers: [MasterDataController],

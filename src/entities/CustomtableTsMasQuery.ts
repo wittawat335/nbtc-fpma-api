@@ -21,9 +21,6 @@ export class CustomtableTsMasQuery {
   @Column("int", { name: "ItemOrder", nullable: true })
   itemOrder: number | null;
 
-  @Column("uniqueidentifier", {
-    name: "ItemGUID",
-    default: () => "'00000000-0000-0000-0000-000000000000'",
-  })
+  @Column("uniqueidentifier", { name: "ItemGUID" })
   itemGuid: string;
 }

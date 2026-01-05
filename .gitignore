@@ -58,3 +58,8 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 *.env
 .env.*
 
+.vs/slnx.sqlite
+.vs/VSWorkspaceState.json
+.vs/nbtc-fpma-api/FileContentIndex/a38152df-969f-4783-bc9a-1c2ff2262ad1.vsidx
+.vs/nbtc-fpma-api/v17/.wsuo
+.vs/nbtc-fpma-api/v17/DocumentLayout.json
